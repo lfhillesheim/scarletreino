@@ -1297,29 +1297,322 @@ body {
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 480px) {
-    .pc-vitals {
-        grid-template-columns: repeat(2, 1fr);
+    .app-container {
+        padding: 12px;
+        padding-bottom: 80px;
     }
 
-    .milestones-grid {
-        grid-template-columns: 1fr;
+    /* Header menor */
+    .rx-header {
+        padding: 15px;
+        margin-bottom: 12px;
+    }
+
+    .rh-title {
+        font-size: 1.4rem;
+    }
+
+    .rh-subtitle {
+        font-size: 0.75rem;
+    }
+
+    /* Countdown */
+    .countdown-display {
+        padding: 12px;
     }
 
     .cd-number {
-        font-size: 2.5rem;
+        font-size: 2.2rem;
     }
 
-    .pp-tab {
-        padding: 12px 8px;
+    .cd-label {
+        font-size: 0.7rem;
     }
 
-    .ppt-emoji {
-        width: 28px;
-        height: 28px;
+    /* Patient Card */
+    .patient-card {
+        padding: 12px;
+        margin-bottom: 12px;
+    }
+
+    .pc-header {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+
+    .pc-avatar {
+        width: 50px;
+        height: 50px;
+    }
+
+    .pc-avatar img {
+        font-size: 1.8rem;
+    }
+
+    .pc-info h2 {
+        font-size: 1rem;
+    }
+
+    .pc-speech {
+        font-size: 0.85rem;
+        padding: 10px;
+    }
+
+    /* Vitals */
+    .pc-vitals {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+    }
+
+    .vital-item {
+        padding: 8px;
+    }
+
+    .vi-label {
+        font-size: 0.65rem;
+    }
+
+    .vi-value {
+        font-size: 1rem;
+    }
+
+    /* Alert */
+    .skip-alert {
+        padding: 10px;
+        font-size: 0.8rem;
+    }
+
+    /* Daily Quote */
+    .daily-quote {
+        padding: 12px;
+        font-size: 0.85rem;
+    }
+
+    /* Milestones */
+    .milestones-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .milestone-card {
+        padding: 12px;
+    }
+
+    .mc-title {
         font-size: 0.9rem;
     }
 
-    .ppt-label {
+    .mc-status {
+        font-size: 0.75rem;
+    }
+
+    /* Week Info */
+    .week-nav {
+        padding: 10px;
+    }
+
+    .wn-label {
+        font-size: 0.8rem;
+    }
+
+    .wn-value {
+        font-size: 1.2rem;
+    }
+
+    .wn-phase {
         font-size: 0.7rem;
+    }
+
+    /* Prescription Pad Tabs */
+    .pp-tabs {
+        gap: 6px;
+    }
+
+    .pp-tab {
+        padding: 10px 6px;
+        flex: 1;
+    }
+
+    .ppt-emoji {
+        width: 26px;
+        height: 26px;
+        font-size: 0.85rem;
+    }
+
+    .ppt-label {
+        font-size: 0.65rem;
+    }
+
+    /* Exercise List */
+    .exercise-rx {
+        padding: 10px;
+        gap: 10px;
+    }
+
+    .er-checkbox {
+        width: 24px;
+        height: 24px;
+        flex-shrink: 0;
+    }
+
+    .er-content {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .er-title {
+        font-size: 0.95rem;
+    }
+
+    .er-sets {
+        font-size: 0.75rem;
+    }
+
+    .er-help {
+        padding: 6px 10px;
+        font-size: 0.75rem;
+    }
+
+    /* Admin Button */
+    .admin-btn {
+        padding: 14px;
+        font-size: 1rem;
+    }
+
+    .ab-icon {
+        font-size: 1.3rem;
+    }
+
+    /* History */
+    .history-section {
+        margin-top: 15px;
+    }
+
+    .history-toggle {
+        padding: 10px;
+        font-size: 0.85rem;
+    }
+
+    .history-content {
+        max-height: 250px;
+    }
+
+    .history-entry {
+        padding: 10px;
+        gap: 10px;
+    }
+
+    .he-day {
+        width: 36px;
+        height: 36px;
+        font-size: 0.9rem;
+    }
+
+    .he-time {
+        font-size: 0.85rem;
+    }
+
+    .he-date {
+        font-size: 0.7rem;
+    }
+
+    /* Modal */
+    .modal-overlay {
+        padding: 15px;
+    }
+
+    .modal-paper {
+        max-height: 85vh;
+    }
+
+    .mp-header {
+        padding: 15px;
+    }
+
+    .mp-title {
+        font-size: 1rem;
+    }
+
+    .mp-close {
+        width: 32px;
+        height: 32px;
+        font-size: 1rem;
+    }
+
+    .mp-body {
+        padding: 15px;
+        font-size: 0.9rem;
+    }
+
+    .mp-body p {
+        margin-bottom: 10px;
+    }
+
+    .mp-body ul {
+        padding-left: 18px;
+    }
+
+    .mp-body li {
+        margin-bottom: 6px;
+    }
+
+    /* Success Overlay */
+    .success-overlay {
+        padding: 20px;
+    }
+
+    .success-content {
+        padding: 25px 20px;
+    }
+
+    .sc-emoji {
+        font-size: 3rem;
+    }
+
+    .sc-title {
+        font-size: 1.3rem;
+    }
+
+    .sc-subtitle {
+        font-size: 0.9rem;
+    }
+
+    .sc-stats {
+        font-size: 0.9rem;
+    }
+
+    .sc-btn {
+        padding: 14px 30px;
+        font-size: 1rem;
+    }
+}
+
+/* Extra small phones */
+@media (max-width: 360px) {
+    .rx-header {
+        padding: 12px;
+    }
+
+    .rh-title {
+        font-size: 1.2rem;
+    }
+
+    .pp-tab {
+        padding: 8px 4px;
+    }
+
+    .ppt-label {
+        font-size: 0.6rem;
+    }
+
+    .exercise-rx {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .er-checkbox {
+        width: 20px;
+        height: 20px;
     }
 }
