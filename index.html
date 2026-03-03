@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dra. Scarlet - Protocolo de Formatura</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Medical Background Elements -->
+    <div class="med-bg">
+        <div class="ecg-line"></div>
+        <div class="ecg-line ecg-line-2"></div>
+        <svg class="dna-helix" viewBox="0 0 200 800">
+            <defs>
+                <linearGradient id="dnaGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" style="stop-color:#10b981"/>
+                    <stop offset="100%" style="stop-color:#ec4899"/>
+                </linearGradient>
+            </defs>
+        </svg>
+    </div>
+
+    <div class="app-container">
+        <!-- Prescription Header -->
+        <header class="rx-header">
+            <div class="rx-symbol">℞</div>
+            <div class="rx-content">
+                <div class="rx-title">PRESCRIÇÃO MÉDICA</div>
+                <div class="rx-subtitle">Protocolo de Transformação Corporal</div>
+                <div class="rx-patient">
+                    <span class="rx-label">Paciente:</span>
+                    <span class="rx-name">Dra. Scarlet</span>
+                    <span class="rx-badge">FUTURA MÉDICA 👩‍⚕️</span>
+                </div>
+            </div>
+            <div class="stethoscope">🩺</div>
+        </header>
+
+        <!-- ECG Countdown -->
+        <div class="ecg-countdown">
+            <div class="ecg-screen">
+                <svg class="ecg-wave" viewBox="0 0 400 60">
+                    <polyline points="0,30 50,30 60,30 70,10 80,50 90,30 100,30 110,30 120,10 130,50 140,30 150,30 160,30 170,30 180,10 190,50 200,30 250,30 260,30 270,10 280,50 290,30 300,30 310,30 320,30 330,10 340,50 350,30 400,30"
+                              fill="none" stroke="#10b981" stroke-width="2"/>
+                </svg>
+                <div class="countdown-display">
+                    <span class="cd-label" id="cdLabel">DIAS PARA A FORMATURA</span>
+                    <span class="cd-number" id="countdownNumber">---</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Patient Status Card -->
+        <div class="patient-card" id="patientCard">
+            <div class="pc-header">
+                <div class="pc-avatar">
+                    <span class="avatar-emoji" id="avatarEmoji">😊</span>
+                    <div class="avatar-ring"></div>
+                </div>
+                <div class="pc-info">
+                    <div class="pc-status" id="pcStatus">Status: Estável</div>
+                    <div class="pc-diagnosis" id="pcDiagnosis">Diagnóstico: Sedentarismo Agudo</div>
+                </div>
+            </div>
+            <div class="pc-vitals">
+                <div class="vital">
+                    <span class="vital-icon">🔥</span>
+                    <span class="vital-value" id="streakValue">0</span>
+                    <span class="vital-label">Streak</span>
+                </div>
+                <div class="vital">
+                    <span class="vital-icon">💉</span>
+                    <span class="vital-value" id="totalWorkouts">0</span>
+                    <span class="vital-label">Doses</span>
+                </div>
+                <div class="vital">
+                    <span class="vital-icon">📊</span>
+                    <span class="vital-value" id="weekProgress">0/3</span>
+                    <span class="vital-label">Semana</span>
+                </div>
+                <div class="vital">
+                    <span class="vital-icon">⚠️</span>
+                    <span class="vital-value" id="skipDays">0</span>
+                    <span class="vital-label">Dias Perdidos</span>
+                </div>
+            </div>
+            <div class="pc-speech" id="pcSpeech">
+                Bom dia, Dra. Scarlet! Hora de checar sua prescrição de hoje.
+            </div>
+        </div>
+
+        <!-- Skip Warning (hidden by default) -->
+        <div class="skip-alert" id="skipAlert" style="display: none;">
+            <div class="alert-pulse"></div>
+            <div class="alert-content">
+                <span class="alert-icon">🚨</span>
+                <div class="alert-text">
+                    <div class="alert-title">ALERTA CLÍNICO</div>
+                    <div class="alert-msg" id="alertMsg">Nível de sedentarismo crítico detectado!</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Week Navigation -->
+        <div class="week-nav">
+            <button class="wn-btn" id="prevWeek">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="15,18 9,12 15,6"/>
+                </svg>
+            </button>
+            <div class="wn-info">
+                <div class="wn-phase" id="wnPhase">Fase 1: Acumulação</div>
+                <div class="wn-week">Semana <span id="weekNum">1</span></div>
+            </div>
+            <button class="wn-btn" id="nextWeek">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="9,18 15,12 9,6"/>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Prescription Pad -->
+        <div class="prescription-pad">
+            <div class="pp-lines"></div>
+
+            <!-- Day Tabs -->
+            <div class="pp-tabs">
+                <button class="pp-tab active" data-day="A">
+                    <span class="ppt-emoji">A</span>
+                    <span class="ppt-label">DIA A</span>
+                    <span class="ppt-focus">Força</span>
+                </button>
+                <button class="pp-tab" data-day="B">
+                    <span class="ppt-emoji">B</span>
+                    <span class="ppt-label">DIA B</span>
+                    <span class="ppt-focus">Hipertrofia</span>
+                </button>
+                <button class="pp-tab" data-day="C">
+                    <span class="ppt-emoji">C</span>
+                    <span class="ppt-label">DIA C</span>
+                    <span class="ppt-focus">Volume + Cardío</span>
+                </button>
+            </div>
+
+            <!-- Prescription Content -->
+            <div class="pp-content">
+                <!-- Day A -->
+                <div class="pp-day active" id="dayA">
+                    <div class="pp-header">
+                        <span class="pph-rx">℞</span>
+                        <div class="pph-text">
+                            <span class="pph-title">Protocolo A - Ênfase em Força</span>
+                            <span class="pph-sig">3x/semana • Supersets • RPE 8-9</span>
+                        </div>
+                    </div>
+
+                    <div class="pp-body">
+                        <!-- Superset 1 -->
+                        <div class="superset-block">
+                            <div class="ss-header">
+                                <span class="ssh-pill">SUPERSET I</span>
+                                <span class="ssh-rest">Descanso 90s após B2</span>
+                            </div>
+
+                            <div class="exercise-rx">
+                                <div class="rx-checkbox">
+                                    <input type="checkbox" class="ex-check" id="a1-check" data-day="A" data-ex="a1">
+                                    <label for="a1-check" class="check-label">
+                                        <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                                    </label>
+                                </div>
+                                <div class="rx-content-ex">
+                                    <div class="rxe-name">Agachamento Livre</div>
+                                    <div class="rxe-dosage">
+                                        <span class="dosage-pill">4 × 4-6</span>
+                                        <span class="dosage-rpe">RPE 8-9</span>
+                                        <button class="help-pill" onclick="showEx('squat')">ℹ️</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="exercise-rx">
+                                <div class="rx-checkbox">
+                                    <input type="checkbox" class="ex-check" id="a2-check" data-day="A" data-ex="a2">
+                                    <label for="a2-check" class="check-label">
+                                        <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                                    </label>
+                                </div>
+                                <div class="rx-content-ex">
+                                    <div class="rxe-name">Remada Unilateral</div>
+                                    <div class="rxe-dosage">
+                                        <span class="dosage-pill">4 × 6-8</span>
+                                        <span class="dosage-rpe">RPE 8</span>
+                                        <button class="help-pill" onclick="showEx('row')">ℹ️</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Superset 2 -->
+                        <div class="superset-block">
+                            <div class="ss-header">
+                                <span class="ssh-pill">SUPERSET II</span>
+                                <span class="ssh-rest">Descanso 90s após B2</span>
+                            </div>
+
+                            <div class="exercise-rx priority">
+                                <div class="priority-badge">🍑 PRIORITY</div>
+                                <div class="rx-checkbox">
+                                    <input type="checkbox" class="ex-check" id="a3-check" data-day="A" data-ex="a3">
+                                    <label for="a3-check" class="check-label">
+                                        <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                                    </label>
+                                </div>
+                                <div class="rx-content-ex">
+                                    <div class="rxe-name">Hip Thrust</div>
+                                    <div class="rxe-dosage">
+                                        <span class="dosage-pill">3 × 6-8</span>
+                                        <span class="dosage-rpe">RPE 8-9</span>
+                                        <button class="help-pill" onclick="showEx('hipthrust')">ℹ️</button>
+                                    </div>
+                                    <div class="rxe-note">💉 Observação: A chave da bunda grande! Use almofada.</div>
+                                </div>
+                            </div>
+
+                            <div class="exercise-rx">
+                                <div class="rx-checkbox">
+                                    <input type="checkbox" class="ex-check" id="a4-check" data-day="A" data-ex="a4">
+                                    <label for="a4-check" class="check-label">
+                                        <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                                    </label>
+                                </div>
+                                <div class="rx-content-ex">
+                                    <div class="rxe-name">Supino Reto com Halteres</div>
+                                    <div class="rxe-dosage">
+                                        <span class="dosage-pill">3 × 6-8</span>
+                                        <span class="dosage-rpe">RPE 8</span>
+                                        <button class="help-pill" onclick="showEx('bench')">ℹ️</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Superset 3 -->
+                        <div class="superset-block">
+                            <div class="ss-header">
+                                <span class="ssh-pill">SUPERSET III</span>
+                                <span class="ssh-rest">Descanso 75s após C2</span>
+                            </div>
+
+                            <div class="exercise-rx">
+                                <div class="rx-checkbox">
+                                    <input type="checkbox" class="ex-check" id="a5-check" data-day="A" data-ex="a5">
+                                    <label for="a5-check" class="check-label">
+                                        <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                                    </label>
+                                </div>
+                                <div class="rx-content-ex">
+                                    <div class="rxe-name">Puxada Frente</div>
+                                    <div class="rxe-dosage">
+                                        <span class="dosage-pill">3 × 8-10</span>
+                                        <span class="dosage-rpe">RPE 8</span>
+                                        <button class="help-pill" onclick="showEx('pulldown')">ℹ️</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="exercise-rx">
+                                <div class="rx-checkbox">
+                                    <input type="checkbox" class="ex-check" id="a6-check" data-day="A" data-ex="a6">
+                                    <label for="a6-check" class="check-label">
+                                        <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                                    </label>
+                                </div>
+                                <div class="rx-content-ex">
+                                    <div class="rxe-name">Desenvolvimento</div>
+                                    <div class="rxe-dosage">
+                                        <span class="dosage-pill">3 × 8-10</span>
+                                        <span class="dosage-rpe">RPE 8</span>
+                                        <button class="help-pill" onclick="showEx('ohp')">ℹ️</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Finisher -->
+                        <div class="finisher-block">
+                            <div class="finisher-header">
+                                <span class="fh-icon">⚡</span>
+                                <span class="fh-text">ADJUVANTE TERAPÊUTICO - Myo-Reps</span>
+                            </div>
+                            <div class="exercise-rx">
+                                <div class="rx-checkbox">
+                                    <input type="checkbox" class="ex-check" id="a7-check" data-day="A" data-ex="a7">
+                                    <label for="a7-check" class="check-label">
+                                        <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                                    </label>
+                                </div>
+                                <div class="rx-content-ex">
+                                    <div class="rxe-name">Face Pull</div>
+                                    <div class="rxe-dosage">
+                                        <span class="dosage-pill special">15 + 3-4×5</span>
+                                        <span class="dosage-note">Myo-Reps: 15s descanso entre mini-sets</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pp-signature">
+                        <button class="admin-btn" id="adminA" disabled>
+                            <span class="ab-icon">✍️</span>
+                            <span class="ab-text">ADMINISTRAR DOSE A</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Day B -->
+                <div class="pp-day" id="dayB">
+                    <div class="pp-header">
+                        <span class="pph-rx">℞</span>
+                        <div class="pph-text">
+                            <span class="pph-title">Protocolo B - Ênfase em Hipertrofia</span>
+                            <span class="pph-sig">3x/semana • Mais reps • Mais glúteo</span>
+                        </div>
+                    </div>
+
+                    <div class="pp-body">
+                        <!-- Superset 1 -->
+                        <div class="superset-block">
+                            <div class="ss-header">
+                                <span class="ssh-pill">SUPERSET I</span>
+                                <span class="ssh-rest">Descanso 90s após A2</span>
+                            </div>
+
+                            <div class="exercise-rx">
+                                <div class="rx-checkbox">
+                                    <input type="checkbox" class="ex-check" id="b1-check" data-day="B" data-ex="b1">
+                                    <label for="b1-check" class="check-label">
+                                        <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                                    </label>
+                                </div>
+                                <div class="rx-content-ex">
+                                    <div class="rxe-name">Romano Morto</div>
+                                    <div class="rxe-dosage">
+                                        <span class="dosage-pill">3 × 8-12</span>
+                                        <span class="dosage-rpe">RPE 7-8</span>
+                                        <button class="help-pill" onclick="showEx('rdl')">ℹ️</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="exercise-rx">
+                                <div class="rx-checkbox">
+                                    <input type="checkbox" class="ex-check" id="b2-check" data-day="B" data-ex="b2">
+                                    <label for="b2-check" class="check-label">
+                                        <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                                    </label>
+                                </div>
+                                <div class="rx-content-ex">
+                                    <div class="rxe-name">Supino Inclinado</div>
+                                    <div class="rxe-dosage">
+                                        <span class="dosage-pill">3 × 8-12</span>
+                                        <span class="dosage-rpe">RPE 7-8</span>
+                                        <button class="help-pill" onclick="showEx('incline')">ℹ️</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Superset 2 -->
+                        <div class="superset-block">
+                            <div class="ss-header">
+                                <span class="ssh-pill">SUPERSET II</span>
+                                <span class="ssh-rest">Descanso 75s após B2</span>
+                            </div>
+
+                            <div class="exercise-rx priority">
+                                <div class="priority-badge">🍑 PRIORITY</div>
+                                <div class="rx-checkbox">
+                                    <input type="checkbox" class="ex-check" id="b3-check" data-day="B" data-ex="b3">
+                                    <label for="b3-check" class="check-label">
+                                        <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                                    </label>
+                                </div>
+                                <div class="rx-content-ex">
+                                    <div class="rxe-name">Búlgara (alternado)</div>
+                                    <div class="rxe-dosage">
+                                        <span class="dosage-pill">3 × 10-12</span>
+                                        <span class="dosage-rpe">RPE 8</span>
+                                        <button class="help-pill" onclick="showEx('bulgarian')">ℹ️</button>
+                                    </div>
+                                    <div class="rxe-note">💉 Perna da frente trabalha, de trás só apoia!</div>
+                                </div>
+                            </div>
+
+                            <div class="exercise-rx">
+                                <div class="rx-checkbox">
+                                    <input type="checkbox" class="ex-check" id="b4-check" data-day="B" data-ex="b4">
+                                    <label for="b4-check" class="check-label">
+                                        <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                                    </label>
+                                </div>
+                                <div class="rx-content-ex">
+                                    <div class="rxe-name">Remada no Cabo</div>
+                                    <div class="rxe-dosage">
+                                        <span class="dosage-pill">3 × 10-12</span>
+                                        <span class="dosage-rpe">RPE 8</span>
+                                        <button class="help-pill" onclick="showEx('cable-row')">ℹ️</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Superset 3 -->
+                        <div class="superset-block">
+                            <div class="ss-header">
+                                <span class="ssh-pill">SUPERSET III</span>
+                                <span class="ssh-rest">Descanso 60s após C2</span>
+                            </div>
+
+                            <div class="exercise-rx">
+                                <div class="rx-checkbox">
+                                    <input type="checkbox" class="ex-check" id="b5-check" data-day="B" data-ex="b5">
+                                    <label for="b5-check" class="check-label">
+                                        <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                                    </label>
+                                </div>
+                                <div class="rx-content-ex">
+                                    <div class="rxe-name">Elevação Lateral</div>
+                                    <div class="rxe-dosage">
+                                        <span class="dosage-pill">3 × 12-15</span>
+                                        <span class="dosage-rpe">RPE 8-9</span>
+                                        <button class="help-pill" onclick="showEx('lateral')">ℹ️</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="exercise-rx">
+                                <div class="rx-checkbox">
+                                    <input type="checkbox" class="ex-check" id="b6-check" data-day="B" data-ex="b6">
+                                    <label for="b6-check" class="check-label">
+                                        <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                                    </label>
+                                </div>
+                                <div class="rx-content-ex">
+                                    <div class="rxe-name">Rosca Direta</div>
+                                    <div class="rxe-dosage">
+                                        <span class="dosage-pill">3 × 10-12</span>
+                                        <span class="dosage-rpe">RPE 8</span>
+                                        <button class="help-pill" onclick="showEx('curl')">ℹ️</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Finisher -->
+                        <div class="finisher-block">
+                            <div class="finisher-header">
+                                <span class="fh-icon">💊</span>
+                                <span class="fh-text">ADJUVANTE - Drop Set</span>
+                            </div>
+                            <div class="exercise-rx">
+                                <div class="rx-checkbox">
+                                    <input type="checkbox" class="ex-check" id="b7-check" data-day="B" data-ex="b7">
+                                    <label for="b7-check" class="check-label">
+                                        <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                                    </label>
+                                </div>
+                                <div class="rx-content-ex">
+                                    <div class="rxe-name">Mesa Flexora - Drop Set</div>
+                                    <div class="rxe-dosage">
+                                        <span class="dosage-pill special">10 → 8 → AMRAP</span>
+                                        <span class="dosage-note">Reduza 20% do peso a cada série, sem descanso</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pp-signature">
+                        <button class="admin-btn" id="adminB" disabled>
+                            <span class="ab-icon">✍️</span>
+                            <span class="ab-text">ADMINISTRAR DOSE B</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Day C -->
+                <div class="pp-day" id="dayC">
+                    <div class="pp-header">
+                        <span class="pph-rx">℞</span>
+                        <div class="pph-text">
+                            <span class="pph-title">Protocolo C - Volume Metabólico</span>
+                            <span class="pph-sig">3x/semana • Alta intensidade • Queima gordura</span>
+                        </div>
+                    </div>
+
+                    <div class="pp-body">
+                        <!-- Superset 1 -->
+                        <div class="superset-block">
+                            <div class="ss-header">
+                                <span class="ssh-pill">SUPERSET I</span>
+                                <span class="ssh-rest">Descanso 75s após A2</span>
+                            </div>
+
+                            <div class="exercise-rx priority">
+                                <div class="priority-badge">🔥 FAT BURN</div>
+                                <div class="rx-checkbox">
+                                    <input type="checkbox" class="ex-check" id="c1-check" data-day="C" data-ex="c1">
+                                    <label for="c1-check" class="check-label">
+                                        <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                                    </label>
+                                </div>
+                                <div class="rx-content-ex">
+                                    <div class="rxe-name">Leg Press</div>
+                                    <div class="rxe-dosage">
+                                        <span class="dosage-pill">3 × 12-15</span>
+                                        <span class="dosage-rpe">RPE 7-8</span>
+                                        <button class="help-pill" onclick="showEx('legpress')">ℹ️</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="exercise-rx">
+                                <div class="rx-checkbox">
+                                    <input type="checkbox" class="ex-check" id="c2-check" data-day="C" data-ex="c2">
+                                    <label for="c2-check" class="check-label">
+                                        <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                                    </label>
+                                </div>
+                                <div class="rx-content-ex">
+                                    <div class="rxe-name">Barra Fixa (ou assistida)</div>
+                                    <div class="rxe-dosage">
+                                        <span class="dosage-pill">3 × 8-12</span>
+                                        <span class="dosage-rpe">RPE 8</span>
+                                        <button class="help-pill" onclick="showEx('pullup')">ℹ️</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Superset 2 -->
+                        <div class="superset-block">
+                            <div class="ss-header">
+                                <span class="ssh-pill">SUPERSET II</span>
+                                <span class="ssh-rest">Descanso 60s após B2</span>
+                            </div>
+
+                            <div class="exercise-rx priority">
+                                <div class="priority-badge">🍑 PRIORITY</div>
+                                <div class="rx-checkbox">
+                                    <input type="checkbox" class="ex-check" id="c3-check" data-day="C" data-ex="c3">
+                                    <label for="c3-check" class="check-label">
+                                        <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                                    </label>
+                                </div>
+                                <div class="rx-content-ex">
+                                    <div class="rxe-name">Cable Pull-Through</div>
+                                    <div class="rxe-dosage">
+                                        <span class="dosage-pill">3 × 12-15</span>
+                                        <span class="dosage-rpe">RPE 8</span>
+                                        <button class="help-pill" onclick="showEx('pullthrough')">ℹ️</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="exercise-rx">
+                                <div class="rx-checkbox">
+                                    <input type="checkbox" class="ex-check" id="c4-check" data-day="C" data-ex="c4">
+                                    <label for="c4-check" class="check-label">
+                                        <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                                    </label>
+                                </div>
+                                <div class="rx-content-ex">
+                                    <div class="rxe-name">Flexão de Braço</div>
+                                    <div class="rxe-dosage">
+                                        <span class="dosage-pill">3 × 12-15</span>
+                                        <span class="dosage-rpe">RPE 8</span>
+                                        <button class="help-pill" onclick="showEx('pushup')">ℹ️</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Superset 3 -->
+                        <div class="superset-block">
+                            <div class="ss-header">
+                                <span class="ssh-pill">SUPERSET III</span>
+                                <span class="ssh-rest">Descanso 60s após C2</span>
+                            </div>
+
+                            <div class="exercise-rx">
+                                <div class="rx-checkbox">
+                                    <input type="checkbox" class="ex-check" id="c5-check" data-day="C" data-ex="c5">
+                                    <label for="c5-check" class="check-label">
+                                        <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                                    </label>
+                                </div>
+                                <div class="rx-content-ex">
+                                    <div class="rxe-name">Abdução de Quadril</div>
+                                    <div class="rxe-dosage">
+                                        <span class="dosage-pill">2 × 15-20</span>
+                                        <span class="dosage-rpe">RPE 8</span>
+                                        <button class="help-pill" onclick="showEx('abduction')">ℹ️</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="exercise-rx">
+                                <div class="rx-checkbox">
+                                    <input type="checkbox" class="ex-check" id="c6-check" data-day="C" data-ex="c6">
+                                    <label for="c6-check" class="check-label">
+                                        <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                                    </label>
+                                </div>
+                                <div class="rx-content-ex">
+                                    <div class="rxe-name">Tríceps Pulley</div>
+                                    <div class="rxe-dosage">
+                                        <span class="dosage-pill">2 × 12-15</span>
+                                        <span class="dosage-rpe">RPE 8</span>
+                                        <button class="help-pill" onclick="showEx('tricep')">ℹ️</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Finisher -->
+                        <div class="finisher-block">
+                            <div class="finisher-header">
+                                <span class="fh-icon">🔥</span>
+                                <span class="fh-text">TERAPIA METABÓLICA - EMOM 5min</span>
+                            </div>
+                            <div class="exercise-rx">
+                                <div class="rx-checkbox">
+                                    <input type="checkbox" class="ex-check" id="c7-check" data-day="C" data-ex="c7">
+                                    <label for="c7-check" class="check-label">
+                                        <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                                    </label>
+                                </div>
+                                <div class="rx-content-ex">
+                                    <div class="rxe-name">Kettlebell Swing</div>
+                                    <div class="rxe-dosage">
+                                        <span class="dosage-pill special">12 reps/min</span>
+                                        <span class="dosage-note">EMOM: 12 swings, descanse o resto do minuto</span>
+                                    </div>
+                                    <div class="rxe-note warning">⚠️ Eleva metabolismo por 14h pós-treino!</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pp-signature">
+                        <button class="admin-btn" id="adminC" disabled>
+                            <span class="ab-icon">✍️</span>
+                            <span class="ab-text">ADMINISTRAR DOSE C</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Treatment Milestones -->
+        <div class="milestones">
+            <div class="milestones-header">
+                <span class="mh-icon">🏆</span>
+                <span class="mh-text">MARCO DO TRATAMENTO</span>
+            </div>
+            <div class="milestones-grid">
+                <div class="milestone" id="mile4">
+                    <div class="ms-icon">🍽️</div>
+                    <div class="ms-dose">4 DOSES</div>
+                    <div class="ms-reward">Jantar Especial</div>
+                    <div class="ms-status" id="ms4-status">Em tratamento...</div>
+                </div>
+                <div class="milestone" id="mile11">
+                    <div class="ms-icon">💅</div>
+                    <div class="ms-dose">11 DOSES</div>
+                    <div class="ms-reward">Unha</div>
+                    <div class="ms-status" id="ms11-status">Em tratamento...</div>
+                </div>
+                <div class="milestone" id="mile20">
+                    <div class="ms-icon">💇‍♀️</div>
+                    <div class="ms-dose">20 DOSES</div>
+                    <div class="ms-reward">Cabelo</div>
+                    <div class="ms-status" id="ms20-status">Em tratamento...</div>
+                </div>
+                <div class="milestone" id="mile500">
+                    <div class="ms-icon">🐱</div>
+                    <div class="ms-dose">500 DOSES</div>
+                    <div class="ms-reward">Adotar um GATO!</div>
+                    <div class="ms-status" id="ms500-status">Paciente persistente...</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Treatment History -->
+        <div class="history-section">
+            <div class="history-header">
+                <span class="hh-icon">📋</span>
+                <span class="hh-text">PRONTUÁRIO</span>
+                <button class="history-toggle" id="historyToggle">Expandir ▼</button>
+            </div>
+            <div class="history-content" id="historyContent">
+                <div class="history-entries" id="historyEntries">
+                    <div class="history-empty">
+                        <span class="he-emoji">📁</span>
+                        <span class="he-text">Nenhuma dose administrada ainda</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Daily Prescription Quote -->
+        <div class="daily-quote">
+            <div class="dq-mark">"</div>
+            <div class="dq-text" id="dqText">A melhor médica é aquela que se cuida primeiro. Escute sua própria prescrição, Dra. Scarlet.</div>
+        </div>
+
+        <!-- Medical Footer -->
+        <footer class="med-footer">
+            <div class="mf-stamp">
+                <div class="stamp-inner">APROVADO</div>
+            </div>
+            <p>Protocolo prescrito com ❤️ para a futura Dra. Scarlet</p>
+            <p class="mf-note">CRM-Amor: Siga a prescrição. A formatura em dezembro não espera.</p>
+        </footer>
+    </div>
+
+    <!-- Exercise Modal -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-prescription">
+            <div class="mp-header">
+                <span class="mph-rx">℞</span>
+                <span class="mph-title" id="mpTitle">Nome do Exercício</span>
+                <button class="mph-close" id="modalClose">✕</button>
+            </div>
+            <div class="mp-body" id="mpBody">
+                <!-- Content goes here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Overlay -->
+    <div class="success-overlay" id="successOverlay">
+        <div class="success-content">
+            <div class="success-ecg">
+                <svg viewBox="0 0 200 60">
+                    <polyline points="0,30 30,30 40,30 50,10 60,50 70,30 80,30 90,30 100,10 110,50 120,30 130,30 140,30 150,30 160,10 170,50 180,30 200,30"
+                              fill="none" stroke="#10b981" stroke-width="3"/>
+                </svg>
+            </div>
+            <div class="success-icon">👩‍⚕️</div>
+            <div class="success-title">DOSE ADMINISTRADA!</div>
+            <div class="success-subtitle" id="successSubtitle">Dia A completo!</div>
+            <div class="success-stats">
+                <span id="successStreak">🔥 Streak: 1</span>
+                <span id="successTotal">💉 Total: 1</span>
+            </div>
+            <button class="success-btn" id="successBtn">CONTINUAR TRATAMENTO</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
